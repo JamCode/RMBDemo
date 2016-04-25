@@ -120,11 +120,11 @@ router.get('/chart', function(req, res){
     }
 
     dealData.sort(function(a, b){
-        return a.t<b.t?1:-1;
+        return a.t>b.t?1:-1;
     });
 
     baseRate.sort(function(a, b){
-        return a.t<b.t?1:-1;
+        return a.t>b.t?1:-1;
     });
 
     for (var i = 0; i < dealData.length; i++) {
