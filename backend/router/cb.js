@@ -54,8 +54,87 @@ var dealData = [
     }
 ];
 
+var baseRate = [
+    {
+        t: Date.now() - 3000*1000,
+        rate: 3.75,
+    },
+    {
+        t: Date.now() - 3000*900,
+        rate: 4.75,
+    },
+    {
+        t: Date.now() - 1000*800,
+        rate: 3.15,
+    },
+    {
+        t: Date.now() - 1000*712,
+        rate: 2.75,
+    },
+    {
+        t: Date.now() - 1000*520,
+        rate: 5.75,
+    },
+    {
+        t: Date.now() - 1000*450,
+        rate: 6.75,
+    },
+    {
+        t: Date.now() - 1000*366,
+        rate: 6.75,
+    },
+    {
+        t: Date.now() - 1000*344,
+        rate: 7.75,
+    },
+    {
+        t: Date.now() - 1000*234,
+        rate: 3.75,
+    }
+];
+
 router.get('/chart', function(req, res){
     console.log('chart');
-    console.log(JSON.stringify(req.query));
-    res.send(dealData);
+
+    var rateMax = 8;
+    var rateMin = 4;
+    var volumeMax = 100;
+    var volumeMin = 50;
+
+    var dealData = [];
+    var baseRate = [];
+
+    for (var i = 0; i < 25; i++) {
+
+        dealData.push({
+            t: parseInt(Date.now() - Math.random()*1000),
+            rate: rateMax+Math.random()*0.1,
+            vol: volumeMax+Math.random()*volumeMin
+        });
+
+        baseRate.push({
+            t: parseInt(Date.now() - Math.random()*1000),
+            rate: rateMax+Math.random()*0.1,
+        });
+
+    }
+
+    dealData.sort(function(a, b){
+        return a.t<b.t?1:-1;
+    });
+
+    baseRate.sort(function(a, b){
+        return a.t<b.t?1:-1;
+    });
+
+    for (var i = 0; i < dealData.length; i++) {
+        console.log(dealData[i].t);
+    }
+
+    var data = {
+        code: 0,
+        dealData: dealData,
+        baseRate: baseRate
+    };
+    res.send(data);
 });

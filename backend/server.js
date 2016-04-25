@@ -13,7 +13,18 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.use('/cb', cbRouter);//路由
+
+//静态文件路由
+app.use(express.static(path.join(__dirname, '/web/html/')));
+app.use(express.static(path.join(__dirname, '/web/css/')));
+app.use(express.static(path.join(__dirname, '/web/fonts/')));
+app.use(express.static(path.join(__dirname, '/web/js/')));
+app.use(express.static(path.join(__dirname, '/web/image/')));
+
+
+
+//api路由
+app.use('/cb', cbRouter);
 
 
 app.listen(4000); //设置监听http请求的端口号
