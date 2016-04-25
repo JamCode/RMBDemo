@@ -89,9 +89,10 @@
                     xAxis: {
                         type: 'datetime',
                         dateTimeLabelFormats:{
-                            millisecond: '%H:%M:%S',
-                            minute:'%H:%M'
-                        }
+                            millisecond: '%H:%M',
+                            second:'%H:%M'
+                        },
+                        tickInterval: 60 * 1000
                     },
 
                     yAxis: [{

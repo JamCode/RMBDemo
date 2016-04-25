@@ -107,13 +107,13 @@ router.get('/chart', function(req, res){
     for (var i = 0; i < 25; i++) {
 
         dealData.push({
-            t: parseInt(Date.now() - Math.random()*1000000),
+            t: parseInt(Date.now() - Math.random()*1000*3600*6),
             rate: parseFloat((rateMax+Math.random()*0.1).toFixed(4)),
             vol: parseInt(volumeMax+Math.random()*volumeMin)
         });
 
         baseRate.push({
-            t: parseInt(Date.now() - Math.random()*1000000),
+            t: parseInt(Date.now() - Math.random()*1000*3600*6),
             rate: parseFloat((rateMax+Math.random()*0.1).toFixed(4)),
         });
 
@@ -126,6 +126,8 @@ router.get('/chart', function(req, res){
     baseRate.sort(function(a, b){
         return a.t>b.t?1:-1;
     });
+
+
 
     for (var i = 0; i < dealData.length; i++) {
         console.log(dealData[i].t);
