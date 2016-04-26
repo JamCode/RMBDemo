@@ -107,13 +107,13 @@ router.get('/chart', function(req, res){
     for (var i = 0; i < 25; i++) {
 
         dealData.push({
-            t: parseInt(Date.now() - Math.random()*1000*3600*6),
+            t: parseInt(Date.now() - Math.random()*1000*3600*7),
             rate: parseFloat((rateMax+Math.random()*0.1).toFixed(4)),
             vol: parseInt(volumeMax+Math.random()*volumeMin)
         });
 
         baseRate.push({
-            t: parseInt(Date.now() - Math.random()*1000*3600*6),
+            t: parseInt(Date.now() - Math.random()*1000*3600*7),
             rate: parseFloat((rateMax+Math.random()*0.1).toFixed(4)),
         });
 

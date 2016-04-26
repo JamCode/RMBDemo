@@ -1,150 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        行情系统
-    </title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    name="viewport">
     <link rel="stylesheet" href="bootstrap.css">
     <script src="angular.js"></script>
     <script src="jquery.min.js">
     </script>
     <script src="bootstrap.min.js">
     </script>
-    <script src="highstock.js">
+    <script src="highcharts.js">
     </script>
+    <script type="text/javascript" src="broken-axis.js"></script>
 </head>
 <body>
     <h1>成交走势图</h1>
     <div id="container">
     </div>
-    <script>
-    $(function () {
-        Highcharts.setOptions({
-        	global: {
-        		useUTC: false
-        	}
-        });
-        Highcharts.setOptions({
-            lang:{
-                rangeSelectorFrom:'从',
-                rangeSelectorTo: '到',
-                months: ['一月', '二月', '三月', '四月', '五月', '六月',
-                '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月',
-                '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                weekdays: ['周末', '周一', '周二', '周三', '周四', '周五', '周六']
-            }
-        });
-        $.ajax({
-            url: 'cb/chart',
-            type:'get',
-            dataType: 'json',
-            success:function(data, status){
-                console.log(JSON.stringify(data));
-                var volume = [];
-                var dealRate = [];
-                var baseRate = [];
-                for(var i = 0; i<data.dealData.length; ++i){
-                    volume.push([
-                        data.dealData[i].t,
-                        data.dealData[i].vol
-                    ]);
-                    dealRate.push([
-                        data.dealData[i].t,
-                        data.dealData[i].rate
-                    ]);
-                }
 
-                for(var i = 0; i<data.baseRate.length;++i){
-                    baseRate.push([
-                        data.baseRate[i].t,
-                        data.baseRate[i].rate
-                    ]);
-                }
-
-
-                $('#container').highcharts('StockChart', {
-
-                    rangeSelector:{
-                        enabled: false
-                    },
-                    navigator:{
-                        enabled: false
-                    },
-                    scrollbar:{
-                        enabled: false
-                    },
-                    credits:{
-                        enabled: false
-                    },
-
-                    title: {
-                        text: '当日成交走势图'
-                    },
-
-                    xAxis: {
-                        type: 'datetime',
-                        dateTimeLabelFormats:{
-                            millisecond: '%H:%M',
-                            second:'%H:%M'
-                        },
-                        tickInterval: 60 * 1000
-                    },
-
-                    yAxis: [{
-                        labels: {
-                            align: 'right',
-                            x: -3
-                        },
-                        title: {
-                            text: '收益率'
-                        },
-                        height: '60%',
-                        lineWidth: 2
-                    }, {
-                        labels: {
-                            align: 'right',
-                            x: -3
-                        },
-                        title: {
-                            text: '成交量'
-                        },
-                        top: '65%',
-                        height: '35%',
-                        offset: 0,
-                        lineWidth: 2
-                    }],
-
-                    series: [
-                        {
-                            name: '成交收益率',
-                            data: dealRate,
-                            step: true
-                        },
-                        {
-                            name: '基准收益率',
-                            data: baseRate,
-                            step: true
-                        },
-                        {
-                            type: 'column',
-                            name: '成交量',
-                            data: volume,
-                            yAxis: 1
-                        }
-                    ]
-                });
-            },
-            error: function(){
-                $("#container").html("<h1>ERROR:"+status+"</h1>");
-            }
-        });
-    });
+    <script src="RMBChart.js">
     </script>
+
+    <!-- <script src="RMBChartTest.js">
+    </script> -->
 
 </body>
 
