@@ -1,7 +1,7 @@
 initGlobelChartsOption();
 $('#container').highcharts(chartOption());
 getData();
-setInterval(getData, 1000*5);
+setInterval(getData, 1000*10);
 
 function getData(){
     $.ajax({
